@@ -1,16 +1,57 @@
-# React + Vite
+URL Shortener web application b uilt with React and Emotion styled components. Transform long URLs into short and shareable links.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features
+1. Convert long URLs to short links in no time.
+2. Automically reuses existing short codes for duplicate URLs.
+3. Monitor how many times each shortened link is clicked.
+4. Copy shortened URLs to clipboard instantly.
+5. smooth animations throughout the app.
+6. Shortened URLs actually work and redirect to originals URLs.
 
-Currently, two official plugins are available:
+Live Demo
+Visit the live application: [URL Shortener](http://localhost:5174)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Technologies Used 
+- React 18: UI library
+- Emotion: CSS in JS styling with styled component
+- React Router: Client side routing for URL redirects
+- LocalStorage API: Data persistence
+- vite: Build tool and development server
 
-## React Compiler
+Prerequisites
+Before runing this project, make sure that you have:
+- Node.js (version 14 or higher)
+- npm or yarn package manager
+- Modern web Browser 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Project Structure
 
-## Expanding the ESLint configuration
+url-shortener/
+├── src/
+│   ├── components/
+│   │   ├── URLShortener/      # Main app component
+│   │   ├── URLInput/           # Input form component
+│   │   ├── ResultDisplay/      # Result display component
+│   │   └── LinkHistory/        # History list component
+│   ├── hooks/
+│   │   └── useURLShortener.js  # Custom hook for logic
+│   ├── utils/
+│   │   ├── urlShortener.js     # URL shortening utilities
+│   │   └── storage.js          # LocalStorage management
+│   ├── App.jsx                 # Root component with routing
+│   ├── main.jsx                # Application entry point
+│   └── index.css               # Global styles
+├── public/                     # Static assets
+├── package.json                # Dependencies and scripts
+└── README.md                   # Documentation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+How It Works
+
+1. User Input: User enters a long URL in the input field
+2. Validation: URL is validated and normalized (adds https:// if missing)
+3. Short Code Generation: A unique 6-character alphanumeric code is generated
+4. Caching Check: System checks if URL already has a short code to avoid duplicates
+5. Storage: Short code and URL mapping are stored in browser's localStorage
+6. Display: Shortened URL is displayed with copy functionality
+7. History: URL is added to history with timestamp and click tracking
+8. Redirect: When someone visits the short URL, they're redirected to the original
