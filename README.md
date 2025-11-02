@@ -9,7 +9,7 @@ Features
 6. Shortened URLs actually work and redirect to originals URLs.
 
 Live Demo
-Visit the live application: [URL Shortener](http://localhost:5174)
+Visit the live application: [URL Shortener](https://url-shortener-ten-brown.vercel.app)
 
 Technologies Used 
 - React 18: UI library
@@ -27,30 +27,24 @@ Before runing this project, make sure that you have:
 Project Structure
 
 url-shortener/
-│
-│  package.json        # Dependencies and scripts
-│  README.md           # Documentation
-│
-├─ public/             # Static assets
-│
-└─ src/
-   │
-   ├─ components/
-   │   • URLShortener/       # Main app component  
-   │   • URLInput/           # Input form component  
-   │   • ResultDisplay/      # Result display component  
-   │   • LinkHistory/        # History list component  
-   │
-   ├─ hooks/
-   │   • useURLShortener.js  # Custom hook for logic  
-   │
-   ├─ utils/
-   │   • urlShortener.js     # URL shortening utilities  
-   │   • storage.js          # LocalStorage management  
-   │
-   • App.jsx                 # Root component with routing  
-   • main.jsx                # Application entry point  
-   • index.css               # Global styles
+- **public/** – static assets
+- **src/**
+  - **components/**
+    - URLShortener/ → Main app component  
+    - URLInput/ → Input form component  
+    - ResultDisplay/ → Result display component  
+    - LinkHistory/ → History list component  
+  - **hooks/**
+    - useURLShortener.js → Custom hook for shortening logic  
+  - **utils/**
+    - urlShortener.js → URL shortening utilities  
+    - storage.js → LocalStorage management  
+  - App.jsx → Root component with routing  
+  - main.jsx → Application entry point  
+  - index.css → Global styles  
+- package.json → Dependencies and scripts  
+- README.md → Documentation
+
 
 
 How It Works
