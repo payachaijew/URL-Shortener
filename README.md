@@ -26,24 +26,34 @@ Before runing this project, make sure that you have:
 
 Project Structure
 
+## 📁 Project Structure
+
 url-shortener/
-├── src/
-│   ├── components/
-│   │   ├── URLShortener/      # Main app component
-│   │   ├── URLInput/           # Input form component
-│   │   ├── ResultDisplay/      # Result display component
-│   │   └── LinkHistory/        # History list component
-│   ├── hooks/
-│   │   └── useURLShortener.js  # Custom hook for logic
-│   ├── utils/
-│   │   ├── urlShortener.js     # URL shortening utilities
-│   │   └── storage.js          # LocalStorage management
-│   ├── App.jsx                 # Root component with routing
-│   ├── main.jsx                # Application entry point
-│   └── index.css               # Global styles
-├── public/                     # Static assets
-├── package.json                # Dependencies and scripts
-└── README.md                   # Documentation
+│
+│  package.json        # Dependencies and scripts
+│  README.md           # Documentation
+│
+├─ public/             # Static assets
+│
+└─ src/
+   │
+   ├─ components/
+   │   • URLShortener/       # Main app component  
+   │   • URLInput/           # Input form component  
+   │   • ResultDisplay/      # Result display component  
+   │   • LinkHistory/        # History list component  
+   │
+   ├─ hooks/
+   │   • useURLShortener.js  # Custom hook for logic  
+   │
+   ├─ utils/
+   │   • urlShortener.js     # URL shortening utilities  
+   │   • storage.js          # LocalStorage management  
+   │
+   • App.jsx                 # Root component with routing  
+   • main.jsx                # Application entry point  
+   • index.css               # Global styles
+
 
 How It Works
 
