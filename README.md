@@ -26,8 +26,6 @@ Before runing this project, make sure that you have:
 
 Project Structure
 
-## 📁 Project Structure
-
 url-shortener/
 │
 │  package.json        # Dependencies and scripts
