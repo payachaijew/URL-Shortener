@@ -1,9 +1,10 @@
 /**
  * ResultDisplay Component
- * Displays the shortened URL result with copy functionality
+ * Displays the shortened URL result with copy functionality and QR code
  */
 
 import React, { useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import {
   ResultContainer,
   SuccessIcon,
@@ -47,6 +48,26 @@ const ResultDisplay = ({ urlData, isCached, onCopy, onReset }) => {
     window.open(urlData.shortUrl, '_blank', 'noopener,noreferrer');
   };
 
+  /**
+   * Handles sharing via Web Share API
+   */
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Check out this link!',
+          text: `Shortened URL: ${urlData.shortUrl}`,
+          url: urlData.shortUrl
+        });
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      // Fallback: copy to clipboard
+      handleCopy();
+    }
+  };
+
   if (!urlData) return null;
 
   return (
@@ -81,6 +102,28 @@ const ResultDisplay = ({ urlData, isCached, onCopy, onReset }) => {
       <OriginalURL>
         <strong>Original:</strong> {urlData.originalUrl}
       </OriginalURL>
+
+      {/* QR Code Section */}
+      <div style={{ 
+        background: 'white', 
+        padding: '1.5rem', 
+        borderRadius: '12px', 
+        marginTop: '1.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '1rem'
+      }}>
+        <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#6b7280' }}>
+          📱 SCAN QR CODE
+        </div>
+        <QRCodeSVG 
+          value={urlData.shortUrl} 
+          size={150}
+          level="H"
+          includeMargin={true}
+        />
+      </div>
 
       <ActionButtons>
         <SecondaryButton
