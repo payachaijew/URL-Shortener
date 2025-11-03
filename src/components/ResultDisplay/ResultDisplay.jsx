@@ -117,8 +117,8 @@ const ResultDisplay = ({ urlData, isCached, onCopy, onReset }) => {
         <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#6b7280' }}>
           📱 SCAN QR CODE
         </div>
-        <QRCodeSVG 
-          value={`${window.location.origin}/${urlData.shortCode}`} 
+        <QRCodeSVG
+          value={urlData.shortUrl} 
           size={150}
           level="H"
           includeMargin={true}
