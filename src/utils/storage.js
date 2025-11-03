@@ -124,9 +124,30 @@ export const clearHistory = () => {
 export const incrementClicks = (shortCode) => {
   try {
     const mappings = getURLMappings();
+
+    // If the shortCode exists in mappings, increment its count
     if (mappings[shortCode]) {
       mappings[shortCode].clicks = (mappings[shortCode].clicks || 0) + 1;
+      mappings[shortCode].lastClickedAt = new Date().toISOString();
       localStorage.setItem(STORAGE_KEYS.URL_MAPPINGS, JSON.stringify(mappings));
+    } else {
+      // If the shortCode doesn't exist (clicked by someone else),
+      // create a minimal entry to track the click
+      mappings[shortCode] = {
+        clicks: 1,
+        lastClickedAt: new Date().toISOString(),
+        shortCode: shortCode
+      };
+      localStorage.setItem(STORAGE_KEYS.URL_MAPPINGS, JSON.stringify(mappings));
+    }
+
+    // Also update history if the entry exists there
+    const history = getHistory();
+    const historyIndex = history.findIndex(item => item.shortCode === shortCode);
+    if (historyIndex !== -1) {
+      history[historyIndex].clicks = mappings[shortCode].clicks;
+      history[historyIndex].lastClickedAt = mappings[shortCode].lastClickedAt;
+      localStorage.setItem(STORAGE_KEYS.URL_HISTORY, JSON.stringify(history));
     }
   } catch (error) {
     console.error('Error incrementing clicks:', error);

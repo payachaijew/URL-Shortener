@@ -55,11 +55,15 @@ export const normalizeURL = (url) => {
  * @returns {Object} URL object with metadata
  */
 export const createURLObject = (originalUrl, shortCode) => {
+  // Encode the original URL in base64 to include in the short URL
+  // This ensures the redirect works even without localStorage
+  const encodedUrl = btoa(encodeURIComponent(originalUrl));
+
   return {
     id: Date.now(),
     originalUrl,
     shortCode,
-    shortUrl: `${window.location.origin}/${shortCode}`,
+    shortUrl: `${window.location.origin}/${shortCode}#${encodedUrl}`,
     createdAt: new Date().toISOString(),
     clicks: 0
   };

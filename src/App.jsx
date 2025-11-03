@@ -13,24 +13,48 @@ import { getURLByShortCode, incrementClicks } from './utils/storage';
  */
 const RedirectHandler = () => {
   const { shortCode } = useParams();
+  const [redirectUrl, setRedirectUrl] = React.useState(null);
+  const [notFound, setNotFound] = React.useState(false);
 
   useEffect(() => {
-    // Get the URL data from storage
-    const urlData = getURLByShortCode(shortCode);
+    // First, try to get the URL from the hash (encoded in the short URL)
+    const hash = window.location.hash.substring(1); // Remove the # symbol
+    let originalUrl = null;
 
-    if (urlData) {
-      // Increment click count
+    if (hash) {
+      try {
+        // Decode the URL from base64
+        originalUrl = decodeURIComponent(atob(hash));
+      } catch (error) {
+        console.error('Error decoding URL from hash:', error);
+      }
+    }
+
+    // If hash is not available, fall back to localStorage
+    if (!originalUrl) {
+      const urlData = getURLByShortCode(shortCode);
+      if (urlData) {
+        originalUrl = urlData.originalUrl;
+      }
+    }
+
+    if (originalUrl) {
+      // Increment click count in localStorage (for the creator's stats)
       incrementClicks(shortCode);
 
+      // Set the redirect URL
+      setRedirectUrl(originalUrl);
+
       // Redirect to original URL
-      window.location.href = urlData.originalUrl;
+      window.location.href = originalUrl;
+    } else {
+      // URL not found
+      setNotFound(true);
     }
   }, [shortCode]);
 
   // If URL not found, redirect to home
-  const urlData = getURLByShortCode(shortCode);
-  
-  if (!urlData) {
+  if (notFound) {
     return <Navigate to="/" replace />;
   }
 
