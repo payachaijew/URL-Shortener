@@ -16,7 +16,8 @@ import {
   shortCodeExists,
   addToHistory,
   getHistory,
-  clearHistory as clearStorageHistory
+  clearHistory as clearStorageHistory,
+  getURLByShortCode
 } from '../utils/storage';
 
 /**
@@ -106,11 +107,27 @@ export const useURLShortener = () => {
       const existingShortCode = findExistingShortCode(normalizedUrl);
 
       if (existingShortCode) {
-        const cachedUrl = createURLObject(normalizedUrl, existingShortCode);
-        setShortenedUrl(cachedUrl);
-        setIsCached(true);
-        setIsLoading(false);
-        return;
+        // Retrieve the actual cached data with all metadata
+        const cachedUrl = getURLByShortCode(existingShortCode);
+        if (cachedUrl) {
+
+          setShortenedUrl(cachedUrl);
+
+          setIsCached(true);
+
+          // Add to history so it appears in the history list
+
+          addToHistory(cachedUrl);
+
+          // Reload history to update UI
+
+          loadHistory();
+
+          setIsLoading(false);
+
+          return;
+
+        }
       }
 
       // Generate new short code
