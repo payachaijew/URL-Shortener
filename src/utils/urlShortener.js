@@ -55,18 +55,11 @@ export const normalizeURL = (url) => {
  * @returns {Object} URL object with metadata
  */
 export const createURLObject = (originalUrl, shortCode) => {
-  // Encode the original URL in base64 to include in the short URL
-  // This ensures the redirect works even without localStorage
-  // Use UTF-8 safe base64 encoding to handle special characters
-  const utf8Bytes = new TextEncoder().encode(originalUrl);
-  const binaryString = Array.from(utf8Bytes, byte => String.fromCharCode(byte)).join('');
-  const encodedUrl = btoa(binaryString);
-
   return {
     id: Date.now(),
     originalUrl,
     shortCode,
-    shortUrl: `${window.location.origin}/${shortCode}#${encodedUrl}`,
+    shortUrl: `${window.location.origin}/${shortCode}`, 
     createdAt: new Date().toISOString(),
     clicks: 0
   };
