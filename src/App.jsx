@@ -23,8 +23,10 @@ const RedirectHandler = () => {
 
     if (hash) {
       try {
-        // Decode the URL from base64
-        originalUrl = decodeURIComponent(atob(hash));
+        // Decode the URL from base64 (UTF-8 safe decoding)
+        const binaryString = atob(hash);
+        const bytes = Uint8Array.from(binaryString, char => char.charCodeAt(0));
+        originalUrl = new TextDecoder().decode(bytes);
       } catch (error) {
         console.error('Error decoding URL from hash:', error);
       }
