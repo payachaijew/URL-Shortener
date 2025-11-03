@@ -37,6 +37,18 @@ export const useURLShortener = () => {
     loadHistory();
   }, []);
 
+  useEffect(() => {
+  const handleFocus = () => {
+    loadHistory();
+  };
+
+  window.addEventListener('focus', handleFocus);
+  
+  return () => {
+    window.removeEventListener('focus', handleFocus);
+    };
+  }, [loadHistory]);
+
   /**
    * Loads history from localStorage
    */
