@@ -1,4 +1,5 @@
-URL Shortener web application b uilt with React and Emotion styled components. Transform long URLs into short and shareable links.
+URL Shortener web application built with React and Emotion styled components. Transform long URLs into short and shareable links.
+
 
 Features
 1. Convert long URLs to short links in no time.
@@ -7,6 +8,16 @@ Features
 4. Copy shortened URLs to clipboard instantly.
 5. smooth animations throughout the app.
 6. Shortened URLs actually work and redirect to originals URLs.
+7. Generate scannable QR codes for shortened URLs
+
+Important: How QR Codes Work in This App on Current Version (localStorage-based)
+This application currently uses browser localStorage for storing shortened URLs. This means:
+- QR codes only work when scanned on the SAME localhost where the URL was created
+
+User Experience
+1. Modern gradient design with smooth animations
+2. View all your shortened URLs with timestamps
+3. History and mappings saved in localStorage
 
 Live Demo
 Visit the live application: [URL Shortener](https://url-shortener-ten-brown.vercel.app)
@@ -17,6 +28,7 @@ Technologies Used
 - React Router: Client side routing for URL redirects
 - LocalStorage API: Data persistence
 - vite: Build tool and development server
+- qrcode.react: QR code generation for shortened URLs
 
 Prerequisites
 Before runing this project, make sure that you have:
@@ -44,7 +56,8 @@ url-shortener/
   - index.css → Global styles  
 - package.json → Dependencies and scripts  
 - README.md → Documentation
-
+- vite.config.js → Vite configuration
+- vercel.json → Vercel deployment 
 
 
 How It Works
@@ -54,6 +67,6 @@ How It Works
 3. Short Code Generation: A unique 6-character alphanumeric code is generated
 4. Caching Check: System checks if URL already has a short code to avoid duplicates
 5. Storage: Short code and URL mapping are stored in browser's localStorage
-6. Display: Shortened URL is displayed with copy functionality
+6. Display: Shows shortened URL with copy button and QR code
 7. History: URL is added to history with timestamp and click tracking
 8. Redirect: When someone visits the short URL, they're redirected to the original
