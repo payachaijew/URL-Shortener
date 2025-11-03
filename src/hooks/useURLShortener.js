@@ -43,7 +43,7 @@ export const useURLShortener = () => {
   // Load history on mount
   useEffect(() => {
     loadHistory();
-  }, []);
+  }, [loadHistory]);
 
   useEffect(() => {
   const handleFocus = () => {
