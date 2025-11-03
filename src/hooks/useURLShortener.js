@@ -32,6 +32,14 @@ export const useURLShortener = () => {
   const [history, setHistory] = useState([]);
   const [isCached, setIsCached] = useState(false);
 
+  /**
+   * Loads history from localStorage
+   */
+  const loadHistory = useCallback(() => {
+    const savedHistory = getHistory();
+    setHistory(savedHistory);
+  }, []);
+
   // Load history on mount
   useEffect(() => {
     loadHistory();
@@ -48,14 +56,6 @@ export const useURLShortener = () => {
     window.removeEventListener('focus', handleFocus);
     };
   }, [loadHistory]);
-
-  /**
-   * Loads history from localStorage
-   */
-  const loadHistory = useCallback(() => {
-    const savedHistory = getHistory();
-    setHistory(savedHistory);
-  }, []);
 
   /**
    * Validates and normalizes input URL
