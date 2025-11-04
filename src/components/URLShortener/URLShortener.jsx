@@ -101,7 +101,7 @@ const URLShortener = () => {
           </p>
           <p style={{ marginTop: '0.5rem' }}>
             <FooterLink
-              href="https://github.com"
+              href="https://github.com/payachaijew/URL-Shortener.git"
               target="_blank"
               rel="noopener noreferrer"
             >
